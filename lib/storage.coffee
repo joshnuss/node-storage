@@ -27,7 +27,15 @@ class Storage
         response.end("Resource created\n")
 
   put: (request, response) ->
-    3
+    self = this
+    @store.update request.url, request, (err, found) ->
+      if err
+        self.handle_error(response)
+      else if found
+        response.writeHead(200)
+        response.end("Resource updated\n")
+      else
+        self.handle_missing(response)
 
   delete: (request, response) ->
     self = this

@@ -22,6 +22,12 @@ node-supervisor -e 'node|js|coffee' -x coffee -w lib,server.coffee server.coffee
 curl -X POST --data-binary @foo.jpg localhost:1337/foo.jpg
 ```
 
+## updating a file
+
+```
+curl -X PUT --data-binary @foo.jpg localhost:1337/foo.jpg
+```
+
 ## reading a file
 
 ```

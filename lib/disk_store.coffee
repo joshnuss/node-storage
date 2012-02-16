@@ -32,6 +32,20 @@ class DiskStore
 
           input.pipe(stream)
 
+  update: (uri, input, callback) ->
+    @exists uri, (actual_path, found) ->
+      if found
+        stream = fs.createWriteStream(actual_path)
+        stream.on 'error', (err) ->
+          callback(err)
+
+        stream.on 'close', ->
+          callback(null,true)
+
+        input.pipe(stream)
+      else
+        callback(null, false)
+
   delete: (uri, callback) ->
     @exists uri, (actual_path, found) ->
       if found
