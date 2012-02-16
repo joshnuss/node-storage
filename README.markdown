@@ -21,3 +21,9 @@ node-supervisor -e 'node|js|coffee' -x coffee -w lib,server.coffee server.coffee
 ```
 curl localhost:1337/foo.txt
 ```
+
+## deleting a file
+
+```
+curl -x DELETE localhost:1337/foo.txt
+```
