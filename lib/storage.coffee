@@ -9,10 +9,16 @@ class Storage
       if err
         self.handle_error(response)
       else if found
-        response.writeHead(200, 
-                           'Content-Type': mime.lookup(request.url),
-                           'Last-Modified': modified) 
-        stream.pipe(response)
+        modified_since = request.headers['if-modified-since']
+
+        if modified_since && new Date(modified_since).getTime() == modified.getTime()
+          response.writeHead(304)
+          response.end('Not modified')
+        else
+          response.writeHead(200, 
+                             'Content-Type': mime.lookup(request.url),
+                             'Last-Modified': modified) 
+          stream.pipe(response)
       else
         self.handle_missing(response)
 
