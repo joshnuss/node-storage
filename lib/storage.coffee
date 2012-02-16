@@ -1,17 +1,24 @@
+mime = require('mime')
+
 class Storage
-  constructor: (@store, @request, @response) ->
+  constructor: (@store) ->
 
-  get: ->
-    @response.writeHead(200)
-    @response.end('ohai')
+  get: (request, response) ->
+    @store.read request.url, (exists, stream) ->
+      if exists
+        response.writeHead(200, 'Content-Type': mime.lookup(request.url)) 
+        stream.pipe(response)
+      else
+        response.writeHead(404)
+        response.end("Resource not found\n")
 
-  post: ->
+  post: (request, response) ->
     2
 
-  put: ->
+  put: (request, response) ->
     3
 
-  delete: ->
+  delete: (request, response) ->
     4
 
 module.exports = Storage
