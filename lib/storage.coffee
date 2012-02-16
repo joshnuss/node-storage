@@ -4,7 +4,6 @@ class Storage
   constructor: (@store) ->
 
   get: (request, response) ->
-    console.log(request.url)
     @store.read request.url, (err, exists, stream) ->
       if err
         response.writeHead(500)
