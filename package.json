@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "mime": "1.2.x",
-    "mkdirp": "0.3.x"
+    "mkdirp": "0.3.x",
+    "nconf": "0.5.x"
   },
   "devDependencies": {}
 }

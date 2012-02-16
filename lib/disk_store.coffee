@@ -1,8 +1,9 @@
 fs = require('fs')
 path = require('path')
 mkdirp = require('mkdirp')
+configuration = require('nconf')
 
-ROOT = 'files'
+configuration.file(file: 'config.json')
 
 fs.rm = (path, callback) ->
   require('child_process').exec("rm " + path, callback)
@@ -55,7 +56,7 @@ class DiskStore
         callback()
   
   make_path: (uri) ->
-    path.join(ROOT, uri)
+    path.join(configuration.get('storage_root'), uri)
 
   exists: (uri, callback) ->
     actual_path = @make_path(uri)

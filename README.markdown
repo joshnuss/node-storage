@@ -6,6 +6,12 @@ Install dependencies with npm
 npm link
 ```
 
+Setup a configuration file ```config.json```, an example is provided
+
+```
+cp config.json.example config.json
+```
+
 # Development mode
 
 Use *node-supervisor* to watch for changes to the coffeescripts and restart node
