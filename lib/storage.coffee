@@ -5,11 +5,13 @@ class Storage
 
   get: (request, response) ->
     self = this
-    @store.read request.url, (err, found, stream) ->
+    @store.read request.url, (err, found, stream, modified) ->
       if err
         self.handle_error(response)
       else if found
-        response.writeHead(200, 'Content-Type': mime.lookup(request.url)) 
+        response.writeHead(200, 
+                           'Content-Type': mime.lookup(request.url),
+                           'Last-Modified': modified) 
         stream.pipe(response)
       else
         self.handle_missing(response)

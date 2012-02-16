@@ -12,11 +12,14 @@ class DiskStore
   read: (uri, callback) ->
     @exists uri, (actual_path, found) ->
       if found
-        stream = fs.createReadStream(actual_path) 
-        stream.on 'error', (err) ->
-          callback(err)
+        fs.stat actual_path, (_, stats) ->
+          stream = fs.createReadStream(actual_path) 
+          stream.on 'error', (err) ->
+            callback(err)
 
-      callback(false, found, stream)
+          callback(null, true, stream, stats.mtime)
+      else
+        callback()
 
   create: (uri, input, callback) ->
     self = this
