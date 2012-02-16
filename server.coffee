@@ -16,5 +16,8 @@ server = http.createServer (request, response) ->
       storage.put(request, response)
     when 'DELETE'
       storage.delete(request, response)
+    else
+      response.writeHeader(501)
+      response.end("Not implemented\n")
 
 server.listen(1337)
