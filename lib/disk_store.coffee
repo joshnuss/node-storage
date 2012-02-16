@@ -8,7 +8,12 @@ class DiskStore
     actual_path = path.join(ROOT, uri)
 
     path.exists actual_path, (exists) ->
-      stream = fs.createReadStream(actual_path) if exists
-      callback(exists, stream)
+      if exists
+        stream = fs.createReadStream(actual_path) 
+        stream.on 'error', (err) ->
+          callback(err)
+
+      callback(false, exists, stream)
+
 
 module.exports = DiskStore
