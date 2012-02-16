@@ -15,7 +15,16 @@ class Storage
         self.handle_missing(response)
 
   post: (request, response) ->
-    2
+    self = this
+    @store.create request.url, request, (err, exists) ->
+      if err
+        self.handle_error(response)
+      else if exists
+        response.writeHead(409)
+        response.end("Resource already exists\n")
+      else
+        response.writeHead(201)
+        response.end("Resource created\n")
 
   put: (request, response) ->
     3

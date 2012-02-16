@@ -16,6 +16,17 @@ class DiskStore
 
       callback(false, exists, stream)
 
+  create: (uri, input, callback) ->
+    @exists uri, (actual_path, exists) ->
+      if exists
+        callback(null, true)
+      else
+        stream = fs.createWriteStream(actual_path)
+        stream.on 'error', (err) ->
+          callback(err)
+        input.pipe(stream)
+        callback()
+
   delete: (uri, callback) ->
     @exists uri, (actual_path, exists) ->
       if exists

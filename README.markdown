@@ -16,6 +16,12 @@ node-supervisor -e 'node|js|coffee' -x coffee -w lib,server.coffee server.coffee
 
 # Operations
 
+## creating a file
+
+```
+curl -X POST --data-binary @foo.jpg localhost:1337/foo.jpg
+```
+
 ## reading a file
 
 ```
