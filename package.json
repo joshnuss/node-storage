@@ -1,0 +1,17 @@
+{
+  "author": "Joshua Nussbaum <joshnuss@gmail.com> (http://github.com/joshnuss)",
+  "name": "node-storage",
+  "description": "An Amazon S3 like storage system",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joshnuss/node-storage.git"
+  },
+  "engines": {
+    "node": "~0.6.4"
+  },
+  "dependencies": {
+    "mime": "1.2.x"
+  },
+  "devDependencies": {}
+}
